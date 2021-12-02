@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-func readFile(file *os.File) []string {
+func ReadFile(file *os.File) []string {
 	scanner := bufio.NewScanner(file)
 	var lines []string
 	for scanner.Scan() {
@@ -37,7 +37,7 @@ func GetLines(filepath string) []string {
 	if err != nil {
 		log.Infof("Could not read file: %v", err)
 	}
-	return readFile(inputFile)
+	return ReadFile(inputFile)
 }
 
 func GetLinesInt(filepath string) []int {

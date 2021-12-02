@@ -32,8 +32,10 @@ func main()  {
 		log.WithError(err)
 		return
 	}
-	increases := countIncreases(input)
-	log.Infof("Solution: %d", increases)
+	increases1 := countIncreases(input)
+	log.Infof("Solution 1: %d", increases1)
+	increases2 := countIncreases(buildSets(input))
+	log.Infof("Solution 2: %d", increases2)
 
 }
 
@@ -66,4 +68,24 @@ func convertInt(in []string) ([]int, error){
 		out[i] = intg
 	}
 	return out, nil
+}
+
+func buildSets(in []int) []int {
+	subset := in
+	sets := make([]int, len(in))
+	for i := range in {
+		if len(subset) >= 3 {
+			sets[i] = getSum(subset[:3])
+		}
+		subset = in[i:]
+	}
+	return sets
+}
+
+func getSum(in []int) int {
+	var out int
+	for _, d := range in {
+		out += d
+	}
+	return out
 }
