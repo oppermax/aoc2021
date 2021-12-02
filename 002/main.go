@@ -12,26 +12,30 @@ type location struct {
 	y int
 }
 
+type submarineGen1 struct {
+	loc *location
+}
+
 func (l *location) getResult() int{
 	return l.x * l.y
 }
 
 func main()  {
 	lines := utils.OpenFile("input.txt")
-	loc := &location{}
+	s := submarineGen1{&location{}}
 	for _, ins := range lines {
 		dir, dis := findInstruction(ins)
-		move(dir, dis, loc)
+		s.move(dir, dis)
 	}
-	log.Infof("Solution 1: %d", loc.getResult())
+	log.Infof("Solution 1: %d", s.loc.getResult())
 }
 
-func moveVer(instruction int, loc *location) {
-	loc.y += instruction
+func (s *submarineGen1) moveVer(instruction int) {
+	s.loc.y += instruction
 }
 
-func moveHor(instruction int, loc *location) {
-	loc.x += instruction
+func (s *submarineGen1)moveHor(instruction int) {
+	s.loc.x += instruction
 }
 
 func findInstruction(line string) (string, int){
@@ -44,15 +48,15 @@ func findInstruction(line string) (string, int){
 	}
 	return direction, distance
 }
-func move(dir string, dis int, loc *location) {
+func (s *submarineGen1) move(dir string, dis int) {
 	switch dir {
 	case "up":
-		moveVer(dis, loc)
+		s.moveVer(dis)
 	case "down":
-		moveVer(-dis, loc)
+		s.moveVer(-dis)
 	case "forward":
-		moveHor(dis, loc)
+		s.moveHor(dis)
 	case "backwards":
-		moveHor(-dis, loc)
+		s.moveHor(-dis)
 	}
 }
