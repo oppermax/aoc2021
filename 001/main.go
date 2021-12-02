@@ -1,24 +1,12 @@
 package main
 
 import (
-	"bufio"
+	"github.com/oppermax/aoc2021/pkg/utils"
 	log "github.com/sirupsen/logrus"
 	"strconv"
 
-	//utils "github.com/oppermax/aoc2021/pkg/utils"
 	"os"
 )
-
-func readFile(file *os.File) []string {
-	scanner := bufio.NewScanner(file)
-	var lines []string
-	for scanner.Scan() {
-		num := scanner.Text()
-
-		lines = append(lines, num)
-	}
-	return lines
-}
 
 func main()  {
 	file, err := os.Open("input.txt")
@@ -26,7 +14,7 @@ func main()  {
 		log.WithError(err)
 		return
 	}
-	inputString := readFile(file)
+	inputString := utils.ReadFile(file)
 	input, err := convertInt(inputString)
 	if err != nil {
 		log.WithError(err)
