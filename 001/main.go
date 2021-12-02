@@ -4,17 +4,11 @@ import (
 	"github.com/oppermax/aoc2021/pkg/utils"
 	log "github.com/sirupsen/logrus"
 	"strconv"
-
-	"os"
 )
 
 func main()  {
-	file, err := os.Open("input.txt")
-	if err != nil {
-		log.WithError(err)
-		return
-	}
-	inputString := utils.ReadFile(file)
+
+	inputString := utils.OpenFile("input.txt")
 	input, err := convertInt(inputString)
 	if err != nil {
 		log.WithError(err)
